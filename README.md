@@ -16,9 +16,9 @@
 
 ## Maintainers
 
-| Maintainer          | GitHub                                  | Social                                    | Sponsoring Company                             |
-| ------------------- | --------------------------------------- | ----------------------------------------- | ---------------------------------------------- |
-| Masahiko Sakakibara | [rdlabo](https://github.com/rdlabo)     | [@rdlabo](https://twitter.com/rdlabo)     | RELATION DESIGN LABO, GENERAL INC. ASSOCIATION |
+| Maintainer          | GitHub                              | Social                                | Sponsoring Company                             |
+| ------------------- | ----------------------------------- | ------------------------------------- | ---------------------------------------------- |
+| Masahiko Sakakibara | [rdlabo](https://github.com/rdlabo) | [@rdlabo](https://twitter.com/rdlabo) | RELATION DESIGN LABO, GENERAL INC. ASSOCIATION |
 
 ## Contributors ✨
 
@@ -201,6 +201,33 @@ if (result.accessToken) {
 }
 ```
 
+### Limited Login (iOS only)
+
+[Limited Login](https://developers.facebook.com/docs/facebook-login/limited-login/) is a type of login, which is limited in terms of tracking users, with smaller set of [available permissions](https://developers.facebook.com/docs/facebook-login/limited-login/ios) It returns an `AuthenticationToken` that wraps an OpenID Connect token, which client then needs to [validate](https://developers.facebook.com/docs/facebook-login/limited-login/token/validating). The token already contains all the requested data, so interaction with Graph API is not required.
+
+```ts
+import {
+  FacebookLogin,
+  FacebookLimitedLoginResponse,
+} from '@capacitor-community/facebook-login';
+import { v4 as uuidv4 } from 'uuid';
+
+const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_gender'];
+const result = await (<FacebookLimitedLoginResponse>(
+  FacebookLogin.loginLimitedly({
+    permissions: FACEBOOK_PERMISSIONS,
+    nonce: uuidv4(),
+  })
+));
+
+if (result.authenticationToken) {
+  // Login successful.
+  console.log(
+    `Facebook authentication token is ${result.authenticationToken.token}`,
+  );
+}
+```
+
 ### Logout
 
 ```ts
@@ -226,6 +253,25 @@ if (result.accessToken) {
 }
 ```
 
+### Current authentication token (Limited Login, iOS only)
+
+```ts
+import {
+  FacebookLogin,
+  FacebookCurrentAuthenticationTokenResponse,
+} from '@capacitor-community/facebook-login';
+
+const result = await (<FacebookCurrentAuthenticationTokenResponse>(
+  FacebookLogin.getCurrentAuthenticationToken()
+));
+
+if (result.authenticationToken) {
+  console.log(
+    `Facebook authentication token is ${result.authenticationToken.token}`,
+  );
+}
+```
+
 ### getProfile
 
 ```ts
@@ -247,9 +293,11 @@ console.log(`Facebook user's email is ${result.email}`);
 
 * [`initialize(...)`](#initialize)
 * [`login(...)`](#login)
+* [`loginLimitedly(...)`](#loginlimitedly)
 * [`logout()`](#logout)
 * [`reauthorize()`](#reauthorize)
 * [`getCurrentAccessToken()`](#getcurrentaccesstoken)
+* [`getCurrentAuthenticationToken()`](#getcurrentauthenticationtoken)
 * [`getProfile(...)`](#getprofile)
 * [`logEvent(...)`](#logevent)
 * [`setAutoLogAppEventsEnabled(...)`](#setautologappeventsenabled)
@@ -291,6 +339,21 @@ login(options: { permissions: string[]; }) => Promise<FacebookLoginResponse>
 --------------------
 
 
+### loginLimitedly(...)
+
+```typescript
+loginLimitedly(options: { permissions: string[]; nonce: string; }) => Promise<FacebookLimitedLoginResponse>
+```
+
+| Param         | Type                                                   |
+| ------------- | ------------------------------------------------------ |
+| **`options`** | <code>{ permissions: string[]; nonce: string; }</code> |
+
+**Returns:** <code>Promise&lt;<a href="#facebooklimitedloginresponse">FacebookLimitedLoginResponse</a>&gt;</code>
+
+--------------------
+
+
 ### logout()
 
 ```typescript
@@ -318,6 +381,17 @@ getCurrentAccessToken() => Promise<FacebookCurrentAccessTokenResponse>
 ```
 
 **Returns:** <code>Promise&lt;<a href="#facebookcurrentaccesstokenresponse">FacebookCurrentAccessTokenResponse</a>&gt;</code>
+
+--------------------
+
+
+### getCurrentAuthenticationToken()
+
+```typescript
+getCurrentAuthenticationToken() => Promise<FacebookCurrentAuthenticationTokenResponse>
+```
+
+**Returns:** <code>Promise&lt;<a href="#facebookcurrentauthenticationtokenresponse">FacebookCurrentAuthenticationTokenResponse</a>&gt;</code>
 
 --------------------
 
@@ -426,11 +500,32 @@ setAdvertiserIDCollectionEnabled(options: { enabled: boolean; }) => Promise<void
 | **`userId`**              | <code>string</code>   |
 
 
+#### FacebookLimitedLoginResponse
+
+| Prop                      | Type                                                                        |
+| ------------------------- | --------------------------------------------------------------------------- |
+| **`authenticationToken`** | <code><a href="#authenticationtoken">AuthenticationToken</a> \| null</code> |
+
+
+#### AuthenticationToken
+
+| Prop        | Type                |
+| ----------- | ------------------- |
+| **`token`** | <code>string</code> |
+
+
 #### FacebookCurrentAccessTokenResponse
 
 | Prop              | Type                                                        |
 | ----------------- | ----------------------------------------------------------- |
 | **`accessToken`** | <code><a href="#accesstoken">AccessToken</a> \| null</code> |
+
+
+#### FacebookCurrentAuthenticationTokenResponse
+
+| Prop                      | Type                                                                        |
+| ------------------------- | --------------------------------------------------------------------------- |
+| **`authenticationToken`** | <code><a href="#authenticationtoken">AuthenticationToken</a> \| null</code> |
 
 
 ### Type Aliases

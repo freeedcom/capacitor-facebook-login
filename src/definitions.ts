@@ -9,22 +9,39 @@ export interface AccessToken {
   userId?: string;
 }
 
+export interface AuthenticationToken {
+  token: string;
+}
+
 export interface FacebookLoginResponse {
   accessToken: AccessToken | null;
   recentlyGrantedPermissions?: string[];
   recentlyDeniedPermissions?: string[];
 }
 
+export interface FacebookLimitedLoginResponse {
+  authenticationToken: AuthenticationToken | null;
+}
+
 export interface FacebookCurrentAccessTokenResponse {
   accessToken: AccessToken | null;
+}
+
+export interface FacebookCurrentAuthenticationTokenResponse {
+  authenticationToken: AuthenticationToken | null;
 }
 
 export interface FacebookLoginPlugin {
   initialize(options: Partial<FacebookConfiguration>): Promise<void>;
   login(options: { permissions: string[] }): Promise<FacebookLoginResponse>;
+  loginLimitedly(options: {
+    permissions: string[];
+    nonce: string;
+  }): Promise<FacebookLimitedLoginResponse>;
   logout(): Promise<void>;
   reauthorize(): Promise<FacebookLoginResponse>;
   getCurrentAccessToken(): Promise<FacebookCurrentAccessTokenResponse>;
+  getCurrentAuthenticationToken(): Promise<FacebookCurrentAuthenticationTokenResponse>;
   getProfile<T extends Record<string, unknown>>(options: {
     fields: readonly string[];
   }): Promise<T>;
