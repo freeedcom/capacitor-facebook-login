@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FacebookLogin } from '@capacitor-community/facebook-login';
+import { FacebookLogin } from '@freeedcom/capacitor-facebook-login';
 import { Platform } from '@ionic/angular';
 
 @Component({

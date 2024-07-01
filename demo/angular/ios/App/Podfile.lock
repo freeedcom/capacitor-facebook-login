@@ -1,7 +1,7 @@
 PODS:
   - Capacitor (6.0.0-rc.2):
     - CapacitorCordova
-  - CapacitorCommunityFacebookLogin (6.0.0):
+  - FreeedcomCapacitorFacebookLogin (6.0.0):
     - Capacitor
     - FBSDKCoreKit (= 17.0.0)
     - FBSDKLoginKit (= 17.0.0)
@@ -17,7 +17,7 @@ PODS:
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
-  - CapacitorCommunityFacebookLogin (from `../../../..`)
+  - FreeedcomCapacitorFacebookLogin (from `../../../..`)
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
 
 SPEC REPOS:
@@ -30,14 +30,14 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Capacitor:
     :path: "../../node_modules/@capacitor/ios"
-  CapacitorCommunityFacebookLogin:
+  FreeedcomCapacitorFacebookLogin:
     :path: "../../../.."
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
 
 SPEC CHECKSUMS:
   Capacitor: 616838064c270088c3c51e0bb2f57259c09f3d55
-  CapacitorCommunityFacebookLogin: f725f1240b8f7ab300723a668591cb8301341cc4
+  FreeedcomCapacitorFacebookLogin: f725f1240b8f7ab300723a668591cb8301341cc4
   CapacitorCordova: 62056f853503fb402c3bd9ea9b93b30f23d1c1ce
   FBAEMKit: 31a20c2d8744d8c57d3a5b7ae4e27b4fdd819193
   FBSDKCoreKit: dac911b656816f8d0b06e5fa4bac60e89505bb3b

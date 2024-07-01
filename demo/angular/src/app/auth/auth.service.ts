@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FacebookLogin } from '@capacitor-community/facebook-login';
+import { FacebookLogin } from '@freeedcom/capacitor-facebook-login';
 import { NavController } from '@ionic/angular';
 
 @Injectable({

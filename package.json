@@ -1,5 +1,5 @@
 {
-  "name": "@capacitor-community/facebook-login",
+  "name": "@freeedcom/capacitor-facebook-login",
   "version": "6.0.0",
   "description": "A native plugin for Facebook Login",
   "engines": {
@@ -14,16 +14,16 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "CapacitorCommunityFacebookLogin.podspec"
+    "FreeedcomCapacitorFacebookLogin.podspec"
   ],
   "author": "Masahiko Sakakibara <sakakibara@rdlabo.jp>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:capacitor-community/facebook-login.git"
+    "url": "git@github.com:freeedcom/capacitor-facebook-login.git"
   },
   "bugs": {
-    "url": "git@github.com:capacitor-community/facebook-login.git/issues"
+    "url": "git@github.com:freeedcom/capacitor-facebook-login.git/issues"
   },
   "scripts": {
     "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",

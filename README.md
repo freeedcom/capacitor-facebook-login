@@ -1,48 +1,14 @@
 <p align="center"><br><img src="https://user-images.githubusercontent.com/236501/85893648-1c92e880-b7a8-11ea-926d-95355b8175c7.png" width="128" height="128" /></p>
-<h3 align="center">Facebook Login</h3>
-<p align="center"><strong><code>@capacitor-community/facebook-login</code></strong></p>
+<h3 align="center">Capacitor Facebook Login</h3>
+<p align="center"><strong><code>@freeedcom/capacitor-facebook-login</code></strong></p>
 <p align="center">
-  Capacitor community plugin for native Facebook Login.
+  A fork of <a href="https://github.com/capacitor-community/facebook-login">capacitor-community/facebook-login</a>, which contains Limited Login implementation for iOS platform.
 </p>
-
-<p align="center">
-  <img src="https://img.shields.io/maintenance/yes/2024?style=flat-square" />
-  <!-- <a href="https://github.com/capacitor-community/example/actions?query=workflow%3A%22CI%22"><img src="https://img.shields.io/github/workflow/status/capacitor-community/example/CI?style=flat-square" /></a> -->
-  <a href="https://www.npmjs.com/package/@capacitor-community/facebook-login"><img src="https://img.shields.io/npm/l/@capacitor-community/facebook-login?style=flat-square" /></a>
-<br>
-  <a href="https://www.npmjs.com/package/@capacitor-community/facebook-login"><img src="https://img.shields.io/npm/dw/@capacitor-community/facebook-login?style=flat-square" /></a>
-  <a href="https://www.npmjs.com/package/@capacitor-community/facebook-login"><img src="https://img.shields.io/npm/v/@capacitor-community/facebook-login?style=flat-square" /></a>
-</p>
-
-## Maintainers
-
-| Maintainer          | GitHub                              | Social                                | Sponsoring Company                             |
-| ------------------- | ----------------------------------- | ------------------------------------- | ---------------------------------------------- |
-| Masahiko Sakakibara | [rdlabo](https://github.com/rdlabo) | [@rdlabo](https://twitter.com/rdlabo) | RELATION DESIGN LABO, GENERAL INC. ASSOCIATION |
-
-## Contributors ✨
-
-<a href="https://github.com/capacitor-community/facebook-login/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=capacitor-community/facebook-login" />
-</a>
-
-Made with [contributors-img](https://contrib.rocks).
-
-## Demo
-
-[Demo code is here.](https://github.com/capacitor-community/facebook-login/tree/master/demo/angular)
-
-## Dependency version
-
-If you want to know facebook library version, you should check:
-
-- [iOS](https://github.com/capacitor-community/facebook-login/blob/master/CapacitorCommunityFacebookLogin.podspec#L18-L19)
-- [Android](https://github.com/capacitor-community/facebook-login/blob/master/android/build.gradle#L52)
 
 ## Installation
 
 ```bash
-% npm i --save @capacitor-community/facebook-login
+% npm i --save @freeedcom/capacitor-facebook-login
 % npx cap update
 ```
 
@@ -51,7 +17,7 @@ If you want to know facebook library version, you should check:
 Users of Capacitor v5 should use version v5 of the Plugin.
 
 ```bash
-% npm install @capacitor-community/facebook-login@5
+% npm install @freeedcom/capacitor-facebook-login@5
 ```
 
 ### Android configuration
@@ -165,7 +131,7 @@ More information can be found here: https://developers.facebook.com/docs/faceboo
 ### Web configuration
 
 ```typescript
-import { FacebookLogin } from '@capacitor-community/facebook-login';
+import { FacebookLogin } from '@freeedcom/capacitor-facebook-login';
 
 // use hook after platform dom ready
 await FacebookLogin.initialize({ appId: '105890006170720' });
@@ -183,7 +149,7 @@ not same type for default web facebook login!
 import {
   FacebookLogin,
   FacebookLoginResponse,
-} from '@capacitor-community/facebook-login';
+} from '@freeedcom/capacitor-facebook-login';
 
 const FACEBOOK_PERMISSIONS = [
   'email',
@@ -209,7 +175,7 @@ if (result.accessToken) {
 import {
   FacebookLogin,
   FacebookLimitedLoginResponse,
-} from '@capacitor-community/facebook-login';
+} from '@freeedcom/capacitor-facebook-login';
 import { v4 as uuidv4 } from 'uuid';
 
 const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_gender'];
@@ -231,7 +197,7 @@ if (result.authenticationToken) {
 ### Logout
 
 ```ts
-import { FacebookLogin } from '@capacitor-community/facebook-login';
+import { FacebookLogin } from '@freeedcom/capacitor-facebook-login';
 
 await FacebookLogin.logout();
 ```
@@ -242,7 +208,7 @@ await FacebookLogin.logout();
 import {
   FacebookLogin,
   FacebookLoginResponse,
-} from '@capacitor-community/facebook-login';
+} from '@freeedcom/capacitor-facebook-login';
 
 const result = await (<FacebookLoginResponse>(
   FacebookLogin.getCurrentAccessToken()
@@ -259,7 +225,7 @@ if (result.accessToken) {
 import {
   FacebookLogin,
   FacebookCurrentAuthenticationTokenResponse,
-} from '@capacitor-community/facebook-login';
+} from '@freeedcom/capacitor-facebook-login';
 
 const result = await (<FacebookCurrentAuthenticationTokenResponse>(
   FacebookLogin.getCurrentAuthenticationToken()
@@ -278,7 +244,7 @@ if (result.authenticationToken) {
 import {
   FacebookLogin,
   FacebookLoginResponse,
-} from '@capacitor-community/facebook-login';
+} from '@freeedcom/capacitor-facebook-login';
 
 const result = await FacebookLogin.getProfile<{
   email: string;
