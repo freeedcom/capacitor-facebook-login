@@ -50,6 +50,46 @@ public class FacebookLogin: CAPPlugin {
         }
     }
 
+    @objc func loginLimitedly(_ call: CAPPluginCall) {
+        guard let permissions = call.getArray("permissions", String.self) else {
+            print("Missing argument: permissions")
+            call.reject("Missing argument: permissions")
+            return
+        }
+
+        guard let nonce = call.getString("nonce") else {
+            print("Missing argument: nonce")
+            call.reject("Missing argument: nonce")
+            return
+        }
+
+        guard let loginConfiguration = LoginConfiguration(
+            permissions: permissions,
+            tracking: .limited,
+            nonce: nonce
+        ) else {
+            print("Invalid login configuration")
+            call.reject("Invalid login configuration")
+            return
+        }
+
+        DispatchQueue.main.async {
+            self.loginManager.logIn(viewController: self.bridge?.viewController, configuration: loginConfiguration) { result in
+                switch result {
+                case .failed(let error):
+                    print(error)
+                    call.reject("Login failed")
+                case .cancelled:
+                    print("User cancelled the login")
+                    call.resolve()
+                case .success:
+                    print("Logged in")
+                    return self.getCurrentAuthenticationToken(call)
+                }
+            }
+        }
+    }
+
     @objc func logout(_ call: CAPPluginCall) {
         loginManager.logOut()
 
@@ -93,6 +133,21 @@ public class FacebookLogin: CAPPlugin {
 
         call.resolve([ "accessToken": accessTokenToJson(accessToken) ])
     }
+
+     private func authenticationTokenToJson(_ authenticationToken: AuthenticationToken) -> [String: Any?] {
+         return [
+             "token": authenticationToken.tokenString,
+         ]
+     }
+
+     @objc func getCurrentAuthenticationToken(_ call: CAPPluginCall) {
+         guard let authenticationToken = AuthenticationToken.current else {
+             call.resolve()
+             return
+         }
+
+         call.resolve([ "authenticationToken": authenticationTokenToJson(authenticationToken) ])
+     }
 
     @objc func getProfile(_ call: CAPPluginCall) {
         guard let accessToken = AccessToken.current else {

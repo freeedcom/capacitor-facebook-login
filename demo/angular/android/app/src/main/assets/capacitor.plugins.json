@@ -1,6 +1,6 @@
 [
 	{
-		"pkg": "@capacitor-community/facebook-login",
+		"pkg": "@freeedcom/capacitor-facebook-login",
 		"classpath": "com.getcapacitor.community.facebooklogin.FacebookLogin"
 	}
 ]

@@ -194,6 +194,11 @@ public class FacebookLogin extends Plugin {
     }
 
     @PluginMethod
+    public void loginLimitedly(PluginCall call) {
+        call.unavailable("Not implemented on Android");
+    }
+
+    @PluginMethod
     public void logout(PluginCall call) {
         Log.d(getLogTag(), "Entering logout()");
 
@@ -237,6 +242,11 @@ public class FacebookLogin extends Plugin {
         }
 
         call.resolve(ret);
+    }
+
+    @PluginMethod
+    public void getCurrentAuthenticationToken(PluginCall call) {
+        call.unavailable("Not implemented on Android");
     }
 
     @PluginMethod

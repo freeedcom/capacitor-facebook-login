@@ -7,6 +7,8 @@ import type {
   FacebookGetLoginStatusResponse,
   FacebookGetProfileResponse,
   FacebookConfiguration,
+  FacebookLimitedLoginResponse,
+  FacebookCurrentAuthenticationTokenResponse,
 } from './definitions';
 
 declare interface Facebook {
@@ -119,6 +121,13 @@ export class FacebookLoginWeb extends WebPlugin implements FacebookLoginPlugin {
     });
   }
 
+  async loginLimitedly(_options: {
+    permissions: string[];
+    nonce: string;
+  }): Promise<FacebookLimitedLoginResponse> {
+    throw new Error('Not implemented on Web');
+  }
+
   async logout(): Promise<void> {
     return new Promise<void>(resolve => FB.logout(() => resolve()));
   }
@@ -157,6 +166,10 @@ export class FacebookLoginWeb extends WebPlugin implements FacebookLoginPlugin {
         });
       },
     );
+  }
+
+  async getCurrentAuthenticationToken(): Promise<FacebookCurrentAuthenticationTokenResponse> {
+    throw new Error('Not implemented on Web');
   }
 
   async getProfile<T extends Record<string, unknown>>(options: {
